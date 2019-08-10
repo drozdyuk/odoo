@@ -2837,7 +2837,7 @@ class BaseModel(MetaModel('DummyModel', (object,), {'_register': False})):
         use_name_get = (load == '_classic_read')
         for record in self:
             try:
-                values = {'id': record.id, 'uuid': record.uuid}
+                values = {'id': record.id}
                 for name, field in name_fields:
                     values[name] = field.convert_to_read_json(record[name], record, use_name_get)
                 result.append(values)
@@ -4665,7 +4665,7 @@ class BaseModel(MetaModel('DummyModel', (object,), {'_register': False})):
 
         if fields and fields == ['id']:
             # shortcut read if we only want the ids
-            return [{'id': record.id, 'uuid': record.uuid} for record in records]
+            return [{'id': record.id} for record in records]
 
         # read() ignores active_test, but it would forward it to any downstream search call
         # (e.g. for x2m or function fields), and this is not the desired behavior, the flag
